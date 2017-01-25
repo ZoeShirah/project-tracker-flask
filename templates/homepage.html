@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Homepage</title>
+    </head>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <body>
+        <h1>Projects</h1>
+
+        <ul>{% for project in projects %}
+            <li><a href="/project?title={{ project[0] }}">{{ project[0] }}</a></li>
+        {% endfor %}</ul>
+
+        <h1>Students</h1>
+
+        <ul>{% for student in students %}
+            <li><a href="/student?github={{ student[2] }}">{{ student[0] }} {{ student[1] }}</a></li>
+        {% endfor %}</ul>
+
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Student Info</title>
+    </head>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <body>
+        <h1>{{ first }} {{ last }}</h1>
+
+        <p>GitHub Account: {{ github }}</p>
+
+        {% for grade in grades %}
+            <ul style="list-style-type: none">
+                <li>project title: <a href="/project?title={{ grade[0] }}">{{ grade[0] }}</a></li>
+                <li>grade = {{ grade[1] }}</li>
+            </ul>
+        {% endfor %}
+
+        Click <a href="/student-add">here</a> if you would like to add a student.
+    </body>
+</html>
