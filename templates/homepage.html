@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>Homepage</title>
@@ -15,15 +15,44 @@
     <body>
         <h1>Projects</h1>
 
-        <ul>{% for project in projects %}
+        <ul>
+          {% for project in projects %}
             <li><a href="/project?title={{ project[0] }}">{{ project[0] }}</a></li>
-        {% endfor %}</ul>
+          {% endfor %}
+        </ul>
+        <button><a href="/project-add">Add Project</a></button>
 
         <h1>Students</h1>
 
-        <ul>{% for student in students %}
+        <ul>
+          {% for student in students %}
             <li><a href="/student?github={{ student[2] }}">{{ student[0] }} {{ student[1] }}</a></li>
-        {% endfor %}</ul>
+          {% endfor %}
+        </ul>
+        <button><a href="/student-add">Add Student</a></button>
+
 
     </body>
-</html>
+</html> -->
+{% extends 'base.html' %}
+{% block title %}Project Tracker Homepage{% endblock %}
+{% block nav_homepage %}active{% endblock %}
+{% block body %}
+    <h1>Projects</h1>
+
+    <ul>
+      {% for project in projects %}
+        <li><a href="/project?title={{ project[0] }}">{{ project[0] }}</a></li>
+      {% endfor %}
+    </ul>
+    <button><a href="/project-add">Add Project</a></button>
+
+    <h1>Students</h1>
+
+    <ul>
+      {% for student in students %}
+        <li><a href="/student?github={{ student[2] }}">{{ student[0] }} {{ student[1] }}</a></li>
+      {% endfor %}
+    </ul>
+    <button><a href="/student-add">Add Student</a></button>
+{% endblock %}

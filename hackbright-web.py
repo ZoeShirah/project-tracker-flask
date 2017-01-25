@@ -1,8 +1,14 @@
-from flask import Flask, request, render_template, flash, redirect
+from flask import Flask, request, render_template, flash, redirect, g
 import hackbright
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
+
+
+@app.before_request
+def add_to_g():
+    g.students = hackbright.get_all_students()
+    g.projects = hackbright.get_all_projects()
 
 
 @app.route("/student")
@@ -70,15 +76,34 @@ def project_info():
 
     print dic
 
-
-    # first, last, github = hackbright.get_student_by_github(github)
-
     return render_template("project_info.html",
                            title=title,
                            description=description,
                            max_grade=max_grade,
                            grades=dic
                            )
+
+@app.route("/project-add")
+def add_project_form():
+    """Show form for adding a project."""
+
+    return render_template("project_add.html")
+
+
+@app.route("/project-add", methods=['POST'])
+def add_project():
+    """Show added project."""
+
+    title = request.form.get('title')
+    description = request.form.get('description')
+    max_grade = request.form.get('max_grade')
+
+    hackbright.make_new_project(title, description, max_grade)
+
+    flash('%s Succesfully Added' % (title))
+
+    return redirect("/project?title="+title)
+
 
 @app.route("/")
 def homepage():

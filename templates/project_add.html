@@ -1,0 +1,19 @@
+
+
+{% extends 'base.html' %}
+{% block title %}Add a Project{% endblock %}
+{% block nav_homepage %}active{% endblock %}
+{% block body %}
+   <form action="/project-add" method='POST'>
+            <label>Enter Title:
+                <input type="text" name="title">
+            </label>
+            <label>Enter a Description:
+                <input type="textarea" name="description">
+            </label>
+            <label>Enter the max grade:
+                <input type="number" name="max_grade">
+            </label>
+            <input type="submit" value="Display Project">
+        </form>
+{% endblock %}
